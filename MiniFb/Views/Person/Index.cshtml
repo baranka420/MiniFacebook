@@ -1,0 +1,36 @@
+﻿@model List <MiniFb.Models.PersonModel>
+@* The code line above specifies the type of model passed to the view. The object that is passed as a model in the controller can be accessed with a Model property inside the view. Usage of this can be seen on line 20. *@
+
+@{
+    ViewBag.Title = "Cats list";
+}
+
+<table id="CatsTable">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*
+            * Any C# can be written inside the view, however it is an extremely bad practise. Limit the c# code in the view to loops and a *SMALL* number of conditional statements.
+            * When writing c# code inside the view it must be preceeded with a @ sign. For  single line expression @ followed by you statement is enough. Sometimes, wrapping your statement in brackets is necessary.
+            * For block of code use @{ [Your C# code] } pattern. It is used in this view on lines 6 to 8
+        *@
+        @foreach (var person in @Model)
+        {
+            <tr>
+                <td>@person.Age</td>
+                <td>@person.FullName </td>
+                
+              @*  <td><button class="ShowDetailsUgly" data-cat-id="@Model.Id">More details (Ugly)</button></td>*@
+             @*   <td><button class="ShowDetailsNice" data-cat-id="@Model.Id">More details (Nice)</button></td>*@
+            </tr>
+        }
+        
+    </tbody>
+</table>
+

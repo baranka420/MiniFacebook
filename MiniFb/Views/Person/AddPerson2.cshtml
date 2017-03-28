@@ -1,0 +1,15 @@
+﻿@model MiniFb.Models.PersonModel
+@{
+    ViewBag.Title = "AddPerson2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>AddPerson2</h2>
+
+@using (Html.BeginForm("AddPerson2", "Person", FormMethod.Post))
+{
+
+
+
+    @Html.TextBoxFor(Model => Model.FullName)
+    <button type="submit">Subscribe</button>
+}
