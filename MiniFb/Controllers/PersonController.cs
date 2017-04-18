@@ -8,6 +8,8 @@ using MiniFb.Database;
 
 namespace MiniFb.Controllers
 {
+
+    
     public class PersonController : Controller
     {
         // GET: Person
@@ -28,6 +30,7 @@ namespace MiniFb.Controllers
                 ImgUrl = "https://www.google.lt/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwit-b-rjLPSAhXEfiwKHU6ADjEQjRwIBw&url=http%3A%2F%2Fwww.sveikuoliai.lt%2Framunas-karbauskis-smegenys-yra-mano-darbo-irankis-kodel-tureciau-jas-zaloti-alkoholiu-nezinau-alkoholio-skonio%2F&bvm=bv.148073327,d.bGg&psig=AFQjCNHAfZdhLb0AwSm11Q1axF0PTBz1VQ&ust=1488381777233585"
             },
         };
+       
         public ActionResult Index()
         {
             using (var context = new FacebookContext())

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MiniFb.Models;
 using MiniFb.Database;
+using System.Web.Security;
 
 namespace MiniFb.Controllers
 {
@@ -82,6 +83,7 @@ namespace MiniFb.Controllers
                 var person = context.Persons.Where(u=>u.UserName==model.Email).ToList().First();
                 if(person.Password == model.Password)
                 {
+                    FormsAuthentication.SetAuthCookie(person.UserName, false);
                     Session["currentUser"] = person.UserName;
                 }
             }
