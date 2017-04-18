@@ -37,6 +37,22 @@ namespace MiniFb.Controllers
                 //context.Persons.Add(person);
                 //context.SaveChanges();
 
+                var currentUser = Session["currentUser"];
+
+                var person = context.Persons.Where(u => u.UserName == currentUser).ToList().First();
+                return View("PersonDetails", person);
+            }
+        }
+
+        public ActionResult List()
+        {
+            using (var context = new FacebookContext())
+            {
+                //PersonModel person = new Models.PersonModel();
+                //person.FullName = "AAA";
+                //context.Persons.Add(person);
+                //context.SaveChanges();
+
                 var persons = context.Persons.ToList();
                 return View("AddPerson2", persons[0]);
             }
@@ -56,6 +72,17 @@ namespace MiniFb.Controllers
         {
             PersonModel selectedPerson = people.Single(person => person.PersonId == Id);
             return View("~/Views/Person/PersonModel.cshtml", selectedPerson);
+        }
+        
+        public ActionResult EditInfo()
+        {
+            using (var context = new FacebookContext())
+            {
+                string currentUser = (string)Session["currentUser"];
+
+                var person = context.Persons.Where(u => u.UserName == currentUser).ToList().First();
+                return View("Edit", person);
+            }
         }
     }
 }

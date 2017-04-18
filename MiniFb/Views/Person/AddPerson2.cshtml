@@ -9,7 +9,14 @@
 {
 
 
+    <div class="form-group">
+        <label for="name">Name</label>
+        @Html.TextBoxFor(Model => Model.FullName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="age">Age</label>
+        @Html.TextBoxFor(Model => Model.Age, new { @class = "form-control" })
+    </div>
+        <button id="submit button" class="btn btn-default" type="submit">Subscribe</button>
 
-    @Html.TextBoxFor(Model => Model.FullName)
-    <button type="submit">Subscribe</button>
 }
