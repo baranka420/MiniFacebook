@@ -96,9 +96,9 @@ namespace MiniFb.Controllers
         {
             using (var context = new FacebookContext())
             {
-                string currentUser = (string)Session["currentUser"];
+                var identity = Guid.Parse(User.Identity.GetUserId());
 
-                var person = context.Persons.Where(u => u.UserName == currentUser).ToList().First();
+                var person = context.Persons.Where(u => u.PersonId == identity).ToList().First();
                 return View("Edit", person);
             }
         }
