@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using MiniFb.Models;
 using MiniFb.Database;
+using Microsoft.AspNet.Identity;
 
 namespace MiniFb.Controllers
 {
 
-    
+    [Authorize]
     public class PersonController : Controller
     {
         // GET: Person
@@ -40,9 +41,18 @@ namespace MiniFb.Controllers
                 //context.Persons.Add(person);
                 //context.SaveChanges();
 
-                var currentUser = Session["currentUser"];
+                var identity = Guid.Parse(User.Identity.GetUserId());
 
-                var person = context.Persons.Where(u => u.UserName == currentUser).ToList().First();
+                //var currentUser = Session["currentUser"];
+
+                var person = context.Persons.FirstOrDefault(u => u.PersonId == identity);
+                if (person == null)
+                {
+                    person = new Models.PersonModel();
+                    person.PersonId = identity;
+                    context.Persons.Add(person);
+                    context.SaveChanges();
+                }
                 return View("PersonDetails", person);
             }
         }
