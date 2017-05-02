@@ -104,9 +104,13 @@ namespace MiniFb.Controllers
         [HttpPost]
         public ActionResult Edit(PersonModel model)
         {
+            PersonModel person;
             using (var context = new FacebookContext())
             {
-                var person = context.Persons.Where(u => u.PersonId == model.PersonId).ToList().First();
+                var identity = Guid.Parse(User.Identity.GetUserId());
+                
+                person = context.Persons.Where(u => u.PersonId == identity).ToList().First();
+                
 
                 person.UserName = model.UserName;
                 person.Bio = model.Bio;
@@ -117,7 +121,7 @@ namespace MiniFb.Controllers
                 context.SaveChanges();
             }
 
-            return View("Index");
+            return View("PersonDetails", person);
         }
 
 
