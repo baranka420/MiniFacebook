@@ -36,9 +36,9 @@ namespace MiniFb.Controllers
         {
             using (var context = new FacebookContext())
             {
-                //PersonModel person = new Models.PersonModel();
-                //person.FullName = "AAA";
-                //context.Persons.Add(person);
+              //  PersonModel person = new Models.PersonModel();
+              //  person.FullName = "AAA";
+              //  context.Persons.Add(person);
                 //context.SaveChanges();
 
                 var identity = Guid.Parse(User.Identity.GetUserId());
@@ -56,6 +56,10 @@ namespace MiniFb.Controllers
                 return View("PersonDetails", person);
             }
         }
+
+  
+
+
 
         public ActionResult List()
         {
@@ -86,8 +90,8 @@ namespace MiniFb.Controllers
             PersonModel selectedPerson = people.Single(person => person.PersonId == Id);
             return View("~/Views/Person/PersonModel.cshtml", selectedPerson);
         }
-        
-        public ActionResult EditInfo()
+    
+        public ActionResult Edit()
         {
             using (var context = new FacebookContext())
             {
@@ -97,5 +101,26 @@ namespace MiniFb.Controllers
                 return View("Edit", person);
             }
         }
+        [HttpPost]
+        public ActionResult Edit(PersonModel model)
+        {
+            using (var context = new FacebookContext())
+            {
+                var person = context.Persons.Where(u => u.PersonId == model.PersonId).ToList().First();
+
+                person.UserName = model.UserName;
+                person.Bio = model.Bio;
+                person.FullName = model.FullName;
+                person.Age = model.Age;
+                person.ImgUrl = model.ImgUrl ;
+
+                context.SaveChanges();
+            }
+
+            return View("Index");
+        }
+
+
+
     }
 }
