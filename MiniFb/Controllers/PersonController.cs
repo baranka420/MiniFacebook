@@ -8,7 +8,8 @@ using MiniFb.Database;
 using Microsoft.AspNet.Identity;
 
 namespace MiniFb.Controllers
-{
+{//kitas@gmail.com
+    //Labas123+
 
     [Authorize]
     public class PersonController : Controller
@@ -112,7 +113,7 @@ namespace MiniFb.Controllers
                 person = context.Persons.Where(u => u.PersonId == identity).ToList().First();
                 
 
-                person.UserName = model.UserName;
+
                 person.Bio = model.Bio;
                 person.FullName = model.FullName;
                 person.Age = model.Age;
